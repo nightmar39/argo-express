@@ -21,5 +21,5 @@ spec:
         repoURL: https://github.com/nightmar39/cd-five-mins.git
         targetRevision: main
       destination:
-        server: in-cluster
+        server: https://kubernetes.default.svc
         namespace: '{{NS}}'
