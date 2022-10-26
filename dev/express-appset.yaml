@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: express-dev
+  labels:
+    app: express-dev
+spec:
+  generators:
+  - list:
+      elements:
+      - NS: engineering-dev
+      - NS: engineering-prod
+      - NS: finance-preprod
+  template:
+    metadata:
+      name: '{{NS}}-guestbook'
+    spec:
+      source:
+        path: ./k8s-resources/express/overlays/dev
+        repoURL: https://github.com/nightmar39/cd-five-mins.git
+        targetRevision: main
+      destination:
+        server: in-cluster
+        namespace: '{{NS}}'
